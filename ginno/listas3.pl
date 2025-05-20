@@ -34,11 +34,10 @@ trimRight([X|L], Result) :-
   invertir(SinCeros, Invertido2),
   Result = Invertido2.
 
-% verifica si la lista esta con elementos sucesivos [k, k+1, k+2, k+n]
-% si esta vacia o tiene un solo elemento es true 
-
-escalera([]).
-escalera([_]).
-escalera([X,Y|L]) :-
+% escalera verifica si la lista esta con elementos sucesivos [k, k+1, k+2, k+n]
+% si esta vacia o tiene un solo elemento es true
+ladder([]).
+ladder([_]).
+ladder([X,Y|L]) :-
   X =:= Y - 1,
-  escalera([Y|L]).
+  ladder([Y|L]).
