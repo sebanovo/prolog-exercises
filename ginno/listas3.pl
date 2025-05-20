@@ -1,4 +1,4 @@
-% invertir un vector
+% 1. Invertir un vector
 invertir([], []).
 
 invertir([X|L], Result) :-
@@ -6,7 +6,7 @@ invertir([X|L], Result) :-
   append(R, [X], Final),
   Result = Final.
 
-% devuelve el elemento de la posicion P
+% 2. Devuelve el elemento de la posicion P
 elemPos([X|_], 0, X).
 
 elemPos([_|L], P, Result) :-
@@ -14,7 +14,7 @@ elemPos([_|L], P, Result) :-
   elemPos(L, P1, R),
   Result is R.
 
-% eliminar los ceros a la izquierda de la lista
+% 3 Eliminar los ceros a la izquierda de la lista
 trimLeft([], []).
 
 trimLeft([X|L], Result) :-
@@ -25,7 +25,7 @@ trimLeft([X|L], Result) :-
 trimLeft([X|L], Result) :-
   Result = [X|L].
 
-% eliminar los ceros a la derecha de la lista
+% 4. Eliminar los ceros a la derecha de la lista
 trimRight([], []).
 
 trimRight([X|L], Result) :-
@@ -34,7 +34,7 @@ trimRight([X|L], Result) :-
   invertir(SinCeros, Invertido2),
   Result = Invertido2.
 
-% escalera verifica si la lista esta con elementos sucesivos [k, k+1, k+2, k+n]
+% 5. escalera verifica si la lista esta con elementos sucesivos [k, k+1, k+2, k+n]
 % si esta vacia o tiene un solo elemento es true
 ladder([]).
 ladder([_]).

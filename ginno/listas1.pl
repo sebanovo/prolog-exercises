@@ -7,43 +7,39 @@ q([X, Y|L]) :-
   write("Y="), writeln(Y),
   write("L="), write(L).
   
-% calcular la suma de de los números de la lista
+% 1. calcular la suma de de los números de la lista
 suma([], 0).
 
 suma([X|L], Result) :- 
   suma(L, R),
   Result is X + R. 
 
-% longitud de la lista
-long(L, Result) :- 
+% 2. obtiene la longitud de la lista
+longitud(L, Result) :- 
   L=:=[], 
   Result is 0.
 
-long([_|L], Result) :- 
-  long(L, R),
+longitud([_|L], Result) :- 
+  longitud(L, R),
   Result is R + 1. 
 
+% 3. Obtiene el enesimo numero de fibonacci 
+fibonacci(1, Result) :- Result is 0, !.
+fibonacci(2, Result) :- Result is 1, !.
+fibonacci(X, Result) :- N1 is X - 1, N2 is X - 2, fibonacci(N1, R1), fibonacci(N2, R2), Result is R1 + R2.
 
-fib(1, Result) :- Result is 0, !.
-fib(2, Result) :- Result is 1, !.
-fib(X, Result) :- N1 is X - 1, N2 is X - 2, fib(N1, R1), fib(N2, R2), Result is R1 + R2.
-
-% La frecuencia del elemento
-% ?- frecuencia([1,2,3,3], 3, Result)
-frec([], _, 0).
-frec([X|L], E, Result) :- 
+% 4. Obtiene la frecuencia del numero 
+frecuencia([], _, 0).
+frecuencia([X|L], E, Result) :- 
   X =:= E,
-  frec(L, E, R),
+  frecuencia(L, E, R),
   Result is R + 1.
 
-frec([_|L], E, Result) :- 
-  frec(L, E, R),
+frecuencia([_|L], E, Result) :- 
+  frecuencia(L, E, R),
   Result is R.
 
-
-% El mayor número
-% ?- mayor([1,2,3,3], Result)
-
+% 5. Obtiene el número mayor 
 mayor([X,_], X).
 
 mayor([X|L], Result) :- 
@@ -55,9 +51,19 @@ mayor([_|L], Result) :-
   mayor(L, R),
   Result is R.
 
-% El indice del elemento
-% ?- indexOf([1,2,3,4], 3, Result).
+% 6. Obtiene el número menor 
+menor([X,_], X).
 
+menor([X|L], Result) :- 
+  menor(L, R),
+  X < R,
+  Result is X.
+
+menor([_|L], Result) :-
+  menor(L, R),
+  Result is R.
+
+% 7. Obtiene el indice del elemento
 indexOf(List, E, Result) :- indexOfAux(List, E, 0, Result).
 
 indexOfAux([], _, _, -1).
@@ -70,8 +76,7 @@ indexOfAux([_|L], E, A, Result):-
   A1 is A + 1,
   indexOfAux(L,E, A1, Result).
 
-% La suma de los pares
-% ?- sumaPares([1,2,3,4,5], Result).
+% 8. Suma los números pares
 sumaPares([], 0).
 
 sumaPares([X|L], Result) :-
