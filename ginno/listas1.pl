@@ -51,7 +51,9 @@ mayor([_|L], Result) :-
   mayor(L, R),
   Result is R.
 
-% 6. Obtiene el número menor 
+% 6. Obtiene el número menor
+% NOTA EN ESTE EJERCICIO SI O SIN NECESITAMOS HACER (X < R) Y (X >= R) PORQUE PARA QUE SEAN
+% Son mutuamente excluyentes y NO HALLA PROBLEMAS 
 menor([X,_], X).
 
 menor([X|L], Result) :- 
@@ -61,6 +63,7 @@ menor([X|L], Result) :-
 
 menor([_|L], Result) :-
   menor(L, R),
+  X >= R,
   Result is R.
 
 % 7. Obtiene el indice del elemento
