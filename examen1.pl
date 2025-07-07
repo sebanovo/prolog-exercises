@@ -29,29 +29,28 @@ Por ejemplo:
 Result = [0,2,9,8,0,0].
 */
 
-% auxiliar eliminar los ceros a la izquierda sino tiene elemento falla
+% auxiliar salta los ceros a la izquierda sino tiene elemento falla
 saltarCeros([], _) :- !, fail. % si esta vacio retornar fail 
-
-saltarCeros([X|L], Result) :-
+saltarCeros([X|L], Proximo, Result) :-
     X =:= 0,
-    saltarCeros(L, R),
-    Result = R.
+    saltarCeros(L, Proximo, Result).
 
-saltarCeros([X|L], Result) :-
-    Result = [X|L].
+saltarCeros([X|L],X, L) :-
+    X =\= 0.
 
 trimCenter([], []).
-trimCenter([X], [X]).
+
 trimCenter([X|L], Result) :-
     X =\= 0,
-    saltarCeros(L, S),
-    trimCenter(S, R),
+    saltarCeros(L, Prox, S),
+    trimCenter([Prox|S], R),
     Result = [X|R].
 
 trimCenter([X|L], Result) :-
-    X =:= 0,
-    trimCenter(L,R),
+    trimCenter(L, R),
     Result = [X|R].
+
+% Se salta una secuencia de ceros si van entre dos no-ceros
 
 /*
 4. Escriba un predicado odd(Lista), el cual devuelva true, si y solo si todos los elementos impares
