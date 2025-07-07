@@ -22,32 +22,36 @@ ins([X|L], E, Dato, Result) :-
 3. 
 Escriba un predicado trimCenter(Lista, Result), el cual devuelva
 en Result la misma Lista, pero quitando los ceros que están 
-entre dos elementos distintos de cero (si todos los elementos son cer
+entre dos elementos distintos de cero (si todos los elementos son cero
 Result = Lista).
 Por ejemplo: 
 ?- trimCenter([0,2,0,9,0,0,0,8,0,0], Result).
 Result = [0,2,9,8,0,0].
 */
 
+% auxiliar eliminar los ceros a la izquierda sino tiene elemento falla
+saltarCeros([], _) :- !, fail. % si esta vacio retornar fail 
+
+saltarCeros([X|L], Result) :-
+    X =:= 0,
+    saltarCeros(L, R),
+    Result = R.
+
+saltarCeros([X|L], Result) :-
+    Result = [X|L].
+
 trimCenter([], []).
 trimCenter([X], [X]).
-trimCenter([X,Y], [X,Y]).
+trimCenter([X|L], Result) :-
+    X =\= 0,
+    saltarCeros(L, S),
+    trimCenter(S, R),
+    Result = [X|R].
 
-trimCenter([A|L], [A|Result]) :-
-    A =\= 0,
-    saltarCeros(L, R, B),
-    trimCenter([B|R], Result).
-
-trimCenter([A|L], [A|Result]) :-
-    trimCenter(L, Result).
-
-% Se salta una secuencia de ceros si van entre dos no-ceros
-% saltarCeros(Entrada, RestoSinCeros, ProximoValor)
-saltarCeros([0|L], Result, Proximo) :-
-    saltarCeros(L, Result, Proximo).
-
-saltarCeros([X|L], L, X) :-
-    X =\= 0.
+trimCenter([X|L], Result) :-
+    X =:= 0,
+    trimCenter(L,R),
+    Result = [X|R].
 
 /*
 4. Escriba un predicado odd(Lista), el cual devuelva true, si y solo si todos los elementos impares
