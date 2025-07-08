@@ -50,8 +50,6 @@ trimCenter([X|L], Result) :-
     trimCenter(L, R),
     Result = [X|R].
 
-% Se salta una secuencia de ceros si van entre dos no-ceros
-
 /*
 4. Escriba un predicado odd(Lista), el cual devuelva true, si y solo si todos los elementos impares
 ocupan las posiciones impares (Si no hay elementos impares), devolver True). 
